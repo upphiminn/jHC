@@ -30,7 +30,7 @@ The **latitude** is the first number in the pair followed by the **longitude**.
 
 
 3. Run the algorithm. 
-To run the algorithm you need to provide the data along with the **eps** and **minPts** parameters. For the traditional **DBSCAN** the steps are the following: 
+To run the algorithm you need to provide the data along with the **linkage** and **distance** parameters. For the traditional **hierarchical clustering** the steps are the following: 
 
 		var hc = jHC().linkage('AVERAGE')
 					  .distance('EUCLIDEAN')
