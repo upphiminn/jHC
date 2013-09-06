@@ -1,6 +1,10 @@
+/* 
+Author: Corneliu S. (github.com/upphiminn)
+2013
+*/
 (function(){
 	//TODO: add threshold as an official parameter! and getters/setters
-	HierarchicalClustering = function() {
+	jHC = function() {
 
 		//Local vars 
 		var point_data;
@@ -40,10 +44,10 @@
 
 			var R = 6371;
 
-			var lat1 = a[1]  * Math.PI / 180, 
+			var lat1 = a[1]  * Math.PI / 180,
 				lon1 = a[0]  * Math.PI / 180;
 			var lat2 = b[1]  * Math.PI / 180,
-				lon2 = b[0]  * Math.PI / 180;
+			    lon2 = b[0]  * Math.PI / 180;
 
 			var dLat = lat2 - lat1;
 			var dLon = lon2 - lon1;
@@ -339,7 +343,7 @@
 				return core;
 		};
 
-		core.pointData = function(data){
+		core.data = function(data){
 			if(typeof data != undefined){
 				point_data = data;
 			}
