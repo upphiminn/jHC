@@ -18,7 +18,7 @@
 
         var link_distance = {};
 
-        //Distances
+        //Distance Functions
 		function euclidean_distance(a, b){
 			var d = 0;
 			for(var i = 0; i < a.length; i++)
@@ -40,10 +40,10 @@
 
 			var R = 6371;
 
-			var lat1 = a.y  * Math.PI / 180, 
-				lon1 = a.x  * Math.PI / 180;
-			var lat2 = b.y  * Math.PI / 180,
-				lon2 = b.x  * Math.PI / 180;
+			var lat1 = a[1]  * Math.PI / 180, 
+				lon1 = a[0]  * Math.PI / 180;
+			var lat2 = b[1]  * Math.PI / 180,
+				lon2 = b[0]  * Math.PI / 180;
 
 			var dLat = lat2 - lat1;
 			var dLon = lon2 - lon1;
@@ -61,16 +61,12 @@
         function init(){
         	point_data.forEach(function(d, i){
 				clusters[i] = {
-								name: i, // interal id
-								id:   point_data[i].id,
-								x:    point_data[i].x,
-								y:    point_data[i].y,
-								//children: [],
-								size: 1,
-								//level: 0
+								name: 			i, // interal id
+								coordinates:    point_data[i],
+								size: 1
 							  };
-				leaf_nodes[clusters[i].id]  = clusters[i];
-				point_cluster_assignment[i] = i;
+				leaf_nodes[clusters[i].name]  = clusters[i];
+				point_cluster_assignment[i]   = i;
 			});
         }
 
@@ -82,20 +78,22 @@
         }
 
         function compute_centroid(cluster_name){
-        	var cluster_x = 0;
-        	var cluster_y = 0;
+        	var cluster_coordinates = [];
         	var num_points = 0;
         	for(var i = 0; i < point_cluster_assignment.length; i++)
         		if(point_cluster_assignment[i] == cluster_name){
-        			cluster_x += point_data[i].x;
-        			cluster_y += point_data[i].y;
-        			num_points++;
+
+        		for(var j = 0; j < point_data[i].coordinates.length; j++){
+        			cluster_coordinates[j] += point_data[i].coordinates[j];
+        		}
+        		num_points++;
         	}
 
-        	cluster_x /= num_points;
-        	cluster_y /= num_points;
+        	for(var j = 0; j < point_data[i].coordinates.length; j++){
+        			cluster_coordinates[j] /= num_points;
+        	}
 
-        	return { x: cluster_x, y: cluster_y };
+        	return cluster_coordinates;
         }
 
         function update_next_link_index(c1, c2){
@@ -185,7 +183,7 @@
 					for(var j = 0; j <= i; j++){
 						var d = Infinity;
 						if(i != j)
-						 	d = distance(clusters[i], clusters[j]);
+						 	d = distance(clusters[i].coordinates, clusters[j].coordinates);
 
 						point_distance_matrix[i] = point_distance_matrix[i] || [];
 						point_distance_matrix[j] = point_distance_matrix[j] || [];
@@ -268,8 +266,7 @@
 			var new_cluster = {
 					name: 		clusters.length,
 					size: 		clusters[to_merge[0]].size + clusters[to_merge[1]].size,
-					children: 	[clusters[to_merge[0]], clusters[to_merge[1]]],
-				//	level: 		Math.max(clusters[to_merge[0]].level, clusters[to_merge[1]].level) + 1
+					children: 	[clusters[to_merge[0]], clusters[to_merge[1]]]
 			};
 			
 			clusters[to_merge[0]].parent = new_cluster;
@@ -279,8 +276,7 @@
 			update_point_cluster_assignment(new_cluster.name, to_merge[0], to_merge[1]);
 			
 			var coordinates = compute_centroid(new_cluster.name);
-			new_cluster.x   = coordinates.x;
-			new_cluster.y   = coordinates.y;
+			new_cluster.coordinates = coordinates;
 			
 			clusters.push(new_cluster);
 
@@ -297,7 +293,7 @@
 			update_next_link_index();
 
 			while(num_clusters > 1){
-				mergeClusters();
+				merge_clusters();
 				num_clusters--;
 			}
 			
