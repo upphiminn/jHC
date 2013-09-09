@@ -39,7 +39,7 @@ To run the algorithm you need to provide the data along with the **linkage** and
 The distance functions available are: **'EUCLIDEAN', 'HAVERSINE'** (for GPS data), **'MANHATTAN'**. The linkages implemented are **'AVERAGE', 'COMPLETE'** and **'SINGLE'**. Additionally you can provide your own distance function, which must accept at least two parameters (the two points), and then pass it to the *distance* method as its parameter. The next step is to simply run the clustering algorithm.
 		
 		// This will run the aglorithm and return the resulting hierarchy tree.
-		var hierarchy_tree = hc();The end root node is wrapped in an array and returned. The resulting clustering hierarchy has the following format:
+		var hierarchy_tree = hc();###Result FormatThe end root node is wrapped in an array and returned. The resulting clustering hierarchy has the following format:
 
 	[{ children: [ // the two children of the root hierarchy node. 
 					{ children : [{ //leaf node 
