@@ -3,7 +3,7 @@ Author: Corneliu S. (github.com/upphiminn)
 2013
 */
 (function(){
-	//TODO: add threshold as an official parameter! and getters/setters
+	//TODO: add threshold as an official parameter.
 	jHC = function() {
 
 		//Local vars 
