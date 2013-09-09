@@ -84,16 +84,17 @@ Author: Corneliu S. (github.com/upphiminn)
         function compute_centroid(cluster_name){
         	var cluster_coordinates = [];
         	var num_points = 0;
+
         	for(var i = 0; i < point_cluster_assignment.length; i++)
         		if(point_cluster_assignment[i] == cluster_name){
 
-        		for(var j = 0; j < point_data[i].coordinates.length; j++){
-        			cluster_coordinates[j] += point_data[i].coordinates[j];
+        		for(var j = 0; j < point_data[i].length; j++){
+        			cluster_coordinates[j] = (cluster_coordinates[j] || 0) + point_data[i][j];
         		}
         		num_points++;
         	}
 
-        	for(var j = 0; j < point_data[i].coordinates.length; j++){
+        	for(var j = 0; j < cluster_coordinates.length; j++){
         			cluster_coordinates[j] /= num_points;
         	}
 
@@ -171,7 +172,7 @@ Author: Corneliu S. (github.com/upphiminn)
         		var average = 0;
         		for(var i = 0 ; i < c1_points.length; i++)
         			for(var j = 0 ; j < c2_points.length; j++){
-        				var d =  (point_data[c1_points[i]], point_data[c2_points[j]]);
+        				var d =  distance(point_data[c1_points[i]], point_data[c2_points[j]]);
 	        			average = average + (+d);
         			}
         		average /= (c1_points.length * c2_points.length);
@@ -266,7 +267,8 @@ Author: Corneliu S. (github.com/upphiminn)
 		}
 
 		function merge_clusters(){
-			var to_merge = getClosestClusters();
+			var to_merge = get_closest_clusters();
+		
 			var new_cluster = {
 					name: 		clusters.length,
 					size: 		clusters[to_merge[0]].size + clusters[to_merge[1]].size,
@@ -316,7 +318,7 @@ Author: Corneliu S. (github.com/upphiminn)
 						case 'HAVERSINE':
 								distance = haversine_distance;
 								break;
-						case 'EUCLIDEN':
+						case 'EUCLIDEAN':
 								distance = euclidean_distance;
 								break;
 						case 'MANHATTAN':
