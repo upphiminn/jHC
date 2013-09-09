@@ -64,4 +64,5 @@ The distance functions available are: **'EUCLIDEAN', 'HAVERSINE'** (for GPS data
          coordinates: [13, 14], // centroid coordinates for the cluster
          name: 4,				 // id of cluster
          size: 3				 // number of points contained
-	}]Additionally you can get the leaf nodes with the *leafNodes* function.
+	}]Additionally you can get the leaf nodes with the *leafNodes* function.###Example
+See working example in the **example/example.html** file. Use the console to inspect the input and output of the algorithm.
