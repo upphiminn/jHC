@@ -1,87 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>jHC EXAMPLE</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="../jHC.js"></script>
-    
-    
-    <style>
-    .node {
-      stroke: #fff;
-      stroke-width: 1.5px;
-    }
 
-    .link {
-      stroke: #999;
-      stroke-opacity: .6;
-    }
+
+    <style>
+        .node {
+            stroke: #fff;
+            stroke-width: 1.5px;
+        }
+        
+        .link {
+            stroke: #999;
+            stroke-opacity: .6;
+        }
     </style>
 </head>
 
-  <body>
+<body>
     <div id="content_wrapper">
-    <input type="button" value="Reset" id='reset_btn' />  
-    <input type="button" value="Run Hierarchical Clustering" id='cluster_btn' />
+        <input type="button" value="Reset" id='reset_btn' />
+        <input type="button" value="Run Hierarchical Clustering" id='cluster_btn' />
     </div>
-  </body>
+</body>
 
-  <script>
+<script>
+    var width = 300;
+    var height = 300;
 
-  var width = 300;
-  var height = 300;
-
-  //helpers
-  function rnd_snd() {
-  return (Math.random()*2-1)+(Math.random()*2-1)+(Math.random()*2-1);
-  }
-
-  function rnd(mean, stdev) {
-    return Math.round(rnd_snd()*stdev+mean);
-  }
-
-  function generate_cluster_data(){
-    var num_clusters = 3;
-    var max_x_stdev = 10;
-    var max_y_stdev = 15;
-    var cluster_size = 30;
-
-    var raw_point_data = [];
-    var cluster_centers = [];
-    for(var i=0; i<num_clusters; i++){
-      cluster_centers.push({x: Math.random()*(width-30), y:Math.random()*(height-30)});
+    //helpers
+    function rnd_snd() {
+        return (Math.random() * 2 - 1) + (Math.random() * 2 - 1) + (Math.random() * 2 - 1);
     }
 
-    cluster_centers.forEach(function(d){
-      for(var i=0; i<cluster_size;i++)
-        raw_point_data.push([rnd(d.x, max_x_stdev), rnd(d.y, max_y_stdev)]);
-    });
+    function rnd(mean, stdev) {
+        return Math.round(rnd_snd() * stdev + mean);
+    }
 
-    return raw_point_data;
-   }
+    function generate_cluster_data() {
+        var num_clusters = 3;
+        var max_x_stdev = 10;
+        var max_y_stdev = 15;
+        var cluster_size = 30;
 
-   function plot_points(points){
-    var node = svg.selectAll(".node")
-                  .data(points)
-                  .enter().append("circle")
-                  .attr("class", "node")
-                  .attr("r", 2)
-                  .style("fill", '#a30500')
-                  .attr('cx', function(d) { return d[0];})
-                  .attr('cy', function(d) { return d[1];});
+        var raw_point_data = [];
+        var cluster_centers = [];
+        for (var i = 0; i < num_clusters; i++) {
+            cluster_centers.push({
+                x: Math.random() * (width - 30),
+                y: Math.random() * (height - 30)
+            });
+        }
+
+        cluster_centers.forEach(function (d) {
+            for (var i = 0; i < cluster_size; i++)
+                raw_point_data.push([rnd(d.x, max_x_stdev), rnd(d.y, max_y_stdev)]);
+        });
+
+        return raw_point_data;
+    }
+
+    function plot_points(points) {
+        var node = svg.selectAll(".node")
+            .data(points)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", 2)
+            .style("fill", '#a30500')
+            .attr('cx', function (d) {
+                return d[0];
+            })
+            .attr('cy', function (d) {
+                return d[1];
+            });
     }
 
     var svg = d3.select("body").append("svg")
-                                .attr("width", width)
-                                .attr("height", height);
+        .attr("width", width)
+        .attr("height", height);
 
-    var raw_point_data = generate_cluster_data();         
+    var raw_point_data = generate_cluster_data();
     console.log('Raw point data input', raw_point_data);
     plot_points(raw_point_data);
 
 
-    d3.select('#cluster_btn').on('click', function(){
+    d3.select('#cluster_btn').on('click', function () {
 
         var hc = jHC().linkage('AVERAGE').distance('EUCLIDEAN').data(raw_point_data);
         var hierarchy_tree = hc();
@@ -91,12 +98,12 @@
     });
 
 
-    d3.select('#reset_btn').on('click', function(){
-       svg.selectAll('.node').remove();
-       var raw_point_data = generate_cluster_data();
-       console.log('Raw point data input', raw_point_data);
-       plot_points(raw_point_data);     
+    d3.select('#reset_btn').on('click', function () {
+        svg.selectAll('.node').remove();
+        var raw_point_data = generate_cluster_data();
+        console.log('Raw point data input', raw_point_data);
+        plot_points(raw_point_data);
     });
+</script>
 
-  </script>
 </html>
