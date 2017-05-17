@@ -9,19 +9,19 @@ Hierarchical clustering **(agglomerative)** is a clustering algorithm that build
 **[1]** http://en.wikipedia.org/wiki/Hierarchical_clustering
 
 
-##Additional Features
+## Additional Features
 
  Besides n-dimensional data, the algorithm also works on data points given by ***GPS coordinates***.
  
-##Usage
+## Usage
 1. Import the script.
 
 		<script type="text/javascript" src="jHC.js"></script>
 		
 2. Sample Data Format
-####Basic Data
+### Basic Data
 		var point_data = [[0.1, 5], [2, 4], [0, 7]];
-####GPS Data
+### GPS Data
 The **latitude** is the first number in the pair followed by the **longitude**.
 
 		var gps_point_data = [  [55.7858667, 12.5233995]
@@ -39,7 +39,9 @@ To run the algorithm you need to provide the data along with the **linkage** and
 The distance functions available are: **'EUCLIDEAN', 'HAVERSINE'** (for GPS data), **'MANHATTAN'**. The linkages implemented are **'AVERAGE', 'COMPLETE'** and **'SINGLE'**. Additionally you can provide your own distance function, which must accept at least two parameters (the two points), and then pass it to the *distance* method as its parameter. The next step is to simply run the clustering algorithm.
 		
 		// This will run the aglorithm and return the resulting hierarchy tree.
-		var hierarchy_tree = hc();###Result FormatThe end root node is wrapped in an array and returned. The resulting clustering hierarchy has the following format:
+		var hierarchy_tree = hc();
+### Result Format
+The end root node is wrapped in an array and returned. The resulting clustering hierarchy has the following format:
 
 	[{ children: [ // the two children of the root hierarchy node. 
 					{ children : [{ //leaf node 
@@ -64,5 +66,9 @@ The distance functions available are: **'EUCLIDEAN', 'HAVERSINE'** (for GPS data
          coordinates: [13, 14], // centroid coordinates for the cluster
          name: 4,				 // id of cluster
          size: 3				 // number of points contained
-	}]Additionally you can get the leaf nodes with the *leafNodes* function.###Example
-See working example in the **example/example.html** file. Use the console to inspect the input and output of the algorithm.
+	}]
+
+Additionally you can get the leaf nodes with the *leafNodes* function.
+### Example
+
+See working example in the **example/example.html** file. Use the console to inspect the input and output of the algorithm.
