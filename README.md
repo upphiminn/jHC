@@ -26,7 +26,7 @@ Hierarchical clustering **(agglomerative)** is a clustering algorithm that build
 ### GPS Data
 The **latitude** is the first number in the pair followed by the **longitude**.
 ```javascript
-	var gps_point_data = [[55.7858667, 12.5233995],[45.4238667, 12.5233995],[25.3438667, 11.6533995] ];
+	var gps_point_data = [[55.7858667, 12.5233995],[45.4238667, 12.5233995],[25.3438667, 11.6533995]];
 ```
 
 3. Run the algorithm. 
@@ -44,30 +44,34 @@ The distance functions available are: **'EUCLIDEAN', 'HAVERSINE'** (for GPS data
 ### Result Format
 The end root node is wrapped in an array and returned. The resulting clustering hierarchy has the following format:
 ```javascript
-	[{ children:[ 	// the two children of the root hierarchy node. 
-			{ children:	[{ //leaf node 
-						coordinates: [9, 5],
-						name: 1,
-						size: 1 },
-				   	{ //leaf node 
-						coordinates: [7, 9],
-						name: 2,
-						size: 1 
-					}], 
-			   coordinates:	[11, 12],
-			   name: 3,
-			   size: 2 
-			  }, 
-			 { //leaf node 
-			   coordinates: [9, 9],
-			   name: 0,
-			   size: 1  
-			 }
-		  ],				   
-         coordinates: [13, 14], // centroid coordinates for the cluster
-	 name: 4,		// id of cluster
-         size: 3		// number of points contained
-	}]
+[
+  { children: [ 	// the two children of the root hierarchy node.
+    { children:	[
+      { //leaf node
+        coordinates: [9, 5],
+        name: 1,
+        size: 1 
+      },
+      { //leaf node
+        coordinates: [7, 9],
+        name: 2,
+        size: 1
+      }
+    ],
+      coordinates: [11, 12],
+      name: 3,
+      size: 2
+    },
+    { //leaf node
+      coordinates: [9, 9],
+      name: 0,
+      size: 1
+    }],
+   coordinates: [13, 14], // centroid coordinates for the cluster
+   name: 4,		// id of cluster
+   size: 3		// number of points contained
+  }
+]
 ```
 Additionally you can get the leaf nodes with the *leafNodes* function.
 ### Example
