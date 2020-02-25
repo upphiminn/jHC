@@ -17,7 +17,7 @@ Code style is very imperative, I know :)
 		module.exports = factory();
 	} else {
 		// Browser globals (root is window)
-		root.returnExports = factory();
+		root.jHC = factory();
 	}
 })(typeof self !== 'undefined' ? self : this, function() {
 	const jHC = function() {

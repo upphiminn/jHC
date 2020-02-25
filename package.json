@@ -1,6 +1,6 @@
 {
-	"name": "jHC",
-	"version": "0.0.0",
+	"name": "jhcluster",
+	"version": "1.0.2",
 	"description": "Hierarchical clustering algorithm",
 	"main": "dist/jHC.js",
 	"scripts": {
@@ -12,12 +12,12 @@
 		"url": "git+https://github.com/upphiminn/jHC.git"
 	},
 	"keywords": [
-		"community",
-		"detection",
+		"hierarchical clustering",
 		"clustering",
 		"algorithms",
-		"social",
-		"computation"
+		"computation",
+		"gps clustering",
+		"gps"
 	],
 	"author": "Corneliu S.",
 	"license": "MIT",
