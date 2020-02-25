@@ -1,0 +1,33 @@
+{
+	"name": "jHC",
+	"version": "0.0.0",
+	"description": "Hierarchical clustering algorithm",
+	"main": "dist/jHC.js",
+	"scripts": {
+		"build": "babel src -s -d dist",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/upphiminn/jHC.git"
+	},
+	"keywords": [
+		"community",
+		"detection",
+		"clustering",
+		"algorithms",
+		"social",
+		"computation"
+	],
+	"author": "Corneliu S.",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/upphiminn/jHC/issues"
+	},
+	"homepage": "https://github.com/upphiminn/jHC#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.8.4",
+		"@babel/preset-env": "^7.8.4"
+	}
+}

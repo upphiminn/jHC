@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>jHC EXAMPLE</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../jHC.js"></script>
+    <script type="text/javascript" src="../dist/jHC.js"></script>
 
 
     <style>
@@ -13,7 +13,7 @@
             stroke: #fff;
             stroke-width: 1.5px;
         }
-        
+
         .link {
             stroke: #999;
             stroke-opacity: .6;
@@ -49,6 +49,7 @@
 
         var raw_point_data = [];
         var cluster_centers = [];
+
         for (var i = 0; i < num_clusters; i++) {
             cluster_centers.push({
                 x: Math.random() * (width - 30),
