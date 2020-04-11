@@ -203,9 +203,8 @@ Code style is very imperative, I know :)
 						let d = distance(point_data[c1_points[i]], point_data[c2_points[j]]);
 						average = average + +d;
 					}
-					average /= c1_points.length * c2_points.length;
 				}
-
+				average /= c1_points.length * c2_points.length;
 				return average;
 			}
 		}
